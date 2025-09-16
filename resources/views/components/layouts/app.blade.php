@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<ul class="breadcrumb">
+<ul class="breadcrumb footer">
     <li class="footerLink">
 		<a href="/" title="{{ __('misc.home_alt') }}" alt="{{ __('misc.home_alt') }}">{{ __('misc.home') }}</a>
 	</li>
