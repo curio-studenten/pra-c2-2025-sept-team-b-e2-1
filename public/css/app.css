@@ -1077,6 +1077,7 @@ pre code {
     }
 
     .col-md-4 {
+        background-color: #f5f5f5;
         flex: 0 0 33.3333333333%;
         max-width: 33.3333333333%;
     }
