@@ -54,38 +54,6 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     display: block;
 }
 
-.topFooter{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0.75rem 1rem;
-}
-
-.bottomFooter{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0.75rem 1rem;
-}
-
-.footerLink{
-    margin: 0px 6px 0px 6px;
-}
-
-.copyright{
-    margin: 0px 6px 0px 6px;
-    color: white;
-}
-
-.footerBottomList{
-    list-style: none;
-    color: white;
-}
-
-.bold{
-    font-weight: bold;
-}
-
 body {
     margin: 0;
     font-family: "Nunito", sans-serif;
@@ -138,7 +106,7 @@ ol,
 ul,
 dl {
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 1rem;
 }
 
 ol ol,
@@ -4590,19 +4558,12 @@ input[type=button].btn-block {
 
 .breadcrumb {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center;
     padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
     list-style: none;
     background-color: #e9ecef;
     border-radius: 0.25rem;
-    bottom: 0;
-    width: 100%;
-}
-
-.footer{
-    background-color: #343a40 !important;
 }
 
 .breadcrumb-item + .breadcrumb-item {
@@ -10044,6 +10005,16 @@ a.text-dark:hover, a.text-dark:focus {
 }
 .gsc-input {
     width: 300px;
+}
+
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
 }
 
 .breadcrumb > li {

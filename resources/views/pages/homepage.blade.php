@@ -53,5 +53,6 @@
             @endforeach
 
         </div>
+
     </div>
 </x-layouts.app>
