@@ -8,9 +8,9 @@
 <x-navbar/>
 
 <div class="container">
-    <div class="row">
+    <div>
 
-        <div class="col-md-8">
+        <div>
             <x-header/>
 
             <ul class="breadcrumb">
@@ -24,24 +24,39 @@
             @else
                 {{ $slot }}
             @endif
-
-            <ul class="breadcrumb">
-                <li>
-					<a href="/" title="{{ __('misc.home_alt') }}" alt="{{ __('misc.home_alt') }}">{{ __('misc.home') }}</a>
-				</li>
-                {{ $breadcrumb ?? '' }}
-            </ul>
-
         </div>
+    </div>
+</div>
 
-        <div class="row">
+<ul class="breadcrumb footer">
+    <div class="topFooter">
+        <li class="footerLink">
+            <a href="/" title="{{ __('misc.home_alt') }}" alt="{{ __('misc.home_alt') }}">{{ __('misc.home') }}</a>
+        </li>
+        {{ $breadcrumb ?? '' }}
+
+        <div class="copyright">
             <x-footer/>
         </div>
-
     </div>
 
-
-</div>
+    <div class="bottomFooter">
+            <ul class="footerBottomList">
+                <li class="bold">Over ons</li>
+                <li>Lorem ipsum bla bla</li>
+            </ul>
+        <ul class="footerBottomList">
+                <li class="bold">Contact gegevens</li>
+                <li>lorem</li>
+                <li>ipsum</li>
+            </ul>
+            <ul class="footerBottomList">
+                <li class="bold">Social links</li>
+                <li>lorem</li>
+                <li>ipsum</li>
+            </ul>
+    </div>
+</ul>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
