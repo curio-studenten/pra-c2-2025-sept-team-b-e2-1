@@ -29,13 +29,32 @@
 </div>
 
 <ul class="breadcrumb footer">
-    <li class="footerLink">
-		<a href="/" title="{{ __('misc.home_alt') }}" alt="{{ __('misc.home_alt') }}">{{ __('misc.home') }}</a>
-	</li>
-    {{ $breadcrumb ?? '' }}
+    <div class="topFooter">
+        <li class="footerLink">
+            <a href="/" title="{{ __('misc.home_alt') }}" alt="{{ __('misc.home_alt') }}">{{ __('misc.home') }}</a>
+        </li>
+        {{ $breadcrumb ?? '' }}
 
-    <div class="copyright">
-        <x-footer/>
+        <div class="copyright">
+            <x-footer/>
+        </div>
+    </div>
+
+    <div class="bottomFooter">
+            <ul class="footerBottomList">
+                <li class="bold">Over ons</li>
+                <li>Lorem ipsum bla bla</li>
+            </ul>
+        <ul class="footerBottomList">
+                <li class="bold">Contact gegevens</li>
+                <li>lorem</li>
+                <li>ipsum</li>
+            </ul>
+            <ul class="footerBottomList">
+                <li class="bold">Social links</li>
+                <li>lorem</li>
+                <li>ipsum</li>
+            </ul>
     </div>
 </ul>
 

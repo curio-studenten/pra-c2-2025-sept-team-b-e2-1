@@ -54,6 +54,20 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     display: block;
 }
 
+.topFooter{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+}
+
+.bottomFooter{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+}
+
 .footerLink{
     margin: 0px 6px 0px 6px;
 }
@@ -61,6 +75,15 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 .copyright{
     margin: 0px 6px 0px 6px;
     color: white;
+}
+
+.footerBottomList{
+    list-style: none;
+    color: white;
+}
+
+.bold{
+    font-weight: bold;
 }
 
 body {
@@ -4566,6 +4589,7 @@ input[type=button].btn-block {
 
 .breadcrumb {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     padding: 0.75rem 1rem;
