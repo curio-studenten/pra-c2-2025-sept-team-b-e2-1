@@ -7,7 +7,7 @@
 
 <x-navbar/>
 
-<div class="container">
+<div class="container mid-container">
     <div>
 
         <div>

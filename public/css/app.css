@@ -588,6 +588,10 @@ pre code {
     margin-left: auto;
 }
 
+.mid-container{
+    min-height: 68vh;
+}
+
 @media (min-width: 576px) {
     .container-sm, .container {
         max-width: 540px;
