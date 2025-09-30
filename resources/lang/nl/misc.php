@@ -22,5 +22,8 @@ return [
 'view_manual' => "Bekijk direct je handleiding",
 'view_manual_alt' => "Bekijk direct je handleiding",
 'all_brands' => "Alle merken",
-
+'input_name' => "Naam:",
+'input_email' => "Email:",
+'input_question' => "Vraag:",
+'input_button' => "Verzenden",
 ];
