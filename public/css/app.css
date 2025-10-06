@@ -10108,3 +10108,26 @@ a.text-dark:hover, a.text-dark:focus {
 .language-switcher{
     padding-left: 2rem;
 }
+
+.form {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.formDirection {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.formButton {
+    width: 395px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.footerContact {
+    color: white;
+}
