@@ -10085,3 +10085,7 @@ a.text-dark:hover, a.text-dark:focus {
     margin-top: 20px;
     margin-bottom: 30px;
 }
+
+.footerContact {
+    color: white;
+}

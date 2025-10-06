@@ -47,7 +47,7 @@
             </ul>
         <ul class="footerBottomList">
                 <li class="bold">Contact gegevens</li>
-                <li>lorem</li>
+                <li><a class="footerContact" href="{{ route('contact') }}">Contact opnemen</a></li>
                 <li>ipsum</li>
             </ul>
             <ul class="footerBottomList">
