@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +43,16 @@ Route::get('/', function () {
     return view('pages.homepage', compact('brands'));
 })->name('home');
 
+Route::get('/lang/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'nl'])) {
+        abort(400);
+    }
+    Session::put('locale', $locale);
+    App::setLocale($locale);
+    return Redirect::back();
+})->name('lang.switch');
+
+
 Route::get('/manual/{language}/{brand_slug}/', [RedirectController::class, 'brand']);
 Route::get('/manual/{language}/{brand_slug}/brand.html', [RedirectController::class, 'brand']);
 
@@ -60,3 +73,4 @@ Route::get('/generateSitemap/', [SitemapController::class, 'generate']);
 Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
+

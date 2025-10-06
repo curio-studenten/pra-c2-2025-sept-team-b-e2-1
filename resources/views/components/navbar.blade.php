@@ -20,7 +20,15 @@
             </script>
             <gcse:searchbox-only></gcse:searchbox-only>
 
-
+            <div class="language-switcher">
+                @if (App::isLocale('en'))
+                    <a href="{{ route('lang.switch', 'nl') }}" class="lang-btn">Nederlands</a>
+                @else
+                    <a href="{{ route('lang.switch', 'en') }}" class="lang-btn">English</a>
+                @endif
+            </div>
         </div><!--/.navbar-collapse -->
+
+
     </div>
 </nav>
