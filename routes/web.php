@@ -27,6 +27,7 @@ Productcat:		/category/12/Computers/
 
 use App\Models\Brand;
 use App\Http\Controllers\RedirectController;
+use App\Http\Controllers\ManualRedirectController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\ManualController;
@@ -49,6 +50,7 @@ Route::get('/datafeeds/{brand_slug}.xml', [RedirectController::class, 'datafeed'
 Route::get('/language/{language_slug}/', [LocaleController::class, 'changeLocale']);
 
 // List of manuals for a brand
+Route::get('/manuals/redirect/{name}', [ManualRedirectController::class, 'redirect'])->name('manuals.redirect');
 Route::get('/{brand_id}/{brand_slug}/', [BrandController::class, 'show']);
 
 // Detail page for a manual
