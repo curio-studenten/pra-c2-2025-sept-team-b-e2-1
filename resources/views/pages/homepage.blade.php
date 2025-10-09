@@ -12,47 +12,91 @@
         </x-slot:title>
     </h1>
 
-
     <?php
-    $size = count($brands);
-    $columns = 3;
-    $chunk_size = ceil($size / $columns);
+        $get = request()->query('v');
+        $get = is_string($get) ? strtolower($get) : null;
+
+        $filtered = $brands;
+        if ($get) {
+            $filtered = $brands->filter(fn($b) => strtolower(substr($b->name, 0, 1)) === $get)->values();
+        }
+
+        $size = count($filtered);
+        $columns = 3;
+        $chunk_size = ceil($size / $columns);
     ?>
 
     <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
+        <?php
+            $initials = $brands->map(function ($b) {
+                return strtoupper(substr($b->name, 0, 1));
+            })->unique()->sort()->values();
+                
+            $letters = collect(range('A', 'Z'));
+        ?>
 
-            @foreach($brands->chunk($chunk_size) as $chunk)
-                <div class="col-md-4">
-
-                    <ul>
-                        @foreach($chunk as $brand)
-
-                            <?php
-                            $current_first_letter = strtoupper(substr($brand->name, 0, 1));
-
-                            if (!isset($header_first_letter) || (isset($header_first_letter) && $current_first_letter != $header_first_letter)) {
-                                echo '</ul>
-						<h2>' . $current_first_letter . '</h2>
-						<ul>';
-                            }
-                            $header_first_letter = $current_first_letter
-                            ?>
-
-                            <li>
-                                <a href="/{{ $brand->id }}/{{ $brand->getNameUrlEncodedAttribute() }}/">{{ $brand->name }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-
-                </div>
+        <nav class="mb-3">
+            @foreach ($letters as $L)
                 <?php
-                unset($header_first_letter);
+                    $enabled = $initials->contains($L);
+                    $active = isset($get) && strtoupper($get) === $L;
+                    $url = request()->fullUrlWithQuery(['v' => strtolower($L)]);
                 ?>
+
+                @if ($enabled)
+                    @if ($active)
+                        <strong>{{ $L }}</strong>
+                    @else
+                        <a href="{{ $url }}">{{ $L }}</a>
+                    @endif
+                    @else
+                        <span class="text-muted">{{ $L }}</span>
+                    @endif
+
+                    @if (!$loop->last)
+                        <span> - </span>
+                    @endif
             @endforeach
+        </nav>
 
+        <?php
+            $grouped = $filtered->groupBy(function ($b) {
+                return strtoupper(substr($b->name, 0, 1));
+                });
+
+            $columns = 3;
+            $chunks = $grouped->chunk(ceil($grouped->count() / $columns));    
+            ?>
+
+        <div class="row">
+            @if ($get)
+                <div class="col-md-12" style="background-color:#f5f5f5;">
+                    <div class="p-3">
+                        <h2>{{ strtoupper($get) }}</h2>
+                        <ul class="mb-0">
+                            @foreach ($filtered as $brand)
+                                <li><a href="/{{ $brand->id }}/{{ $brand->getNameUrlEncodedAttribute() }}/">{{ $brand->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @else
+                @foreach ($chunks as $groupChunk)
+                    <div class="col-md-4">
+                        <div class="p-3">
+                            @foreach ($groupChunk as $letter => $brandsForLetter)
+                                <h2>{{ $letter }}</h2>
+                                <ul>
+                                    @foreach ($brandsForLetter as $brand)
+                                        <li><a href="/{{ $brand->id }}/{{ $brand->getNameUrlEncodedAttribute() }}/">{{ $brand->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
-
+        
     </div>
 </x-layouts.app>
