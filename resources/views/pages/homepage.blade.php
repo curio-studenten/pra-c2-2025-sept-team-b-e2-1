@@ -31,7 +31,7 @@
             $initials = $brands->map(function ($b) {
                 return strtoupper(substr($b->name, 0, 1));
             })->unique()->sort()->values();
-                
+
             $letters = collect(range('A', 'Z'));
         ?>
 
@@ -65,8 +65,85 @@
                 });
 
             $columns = 3;
-            $chunks = $grouped->chunk(ceil($grouped->count() / $columns));    
-            ?>
+            $chunks = $grouped->chunk(ceil($grouped->count() / $columns));
+        ?>
+
+        <?php
+            $get = request()->query('v');
+            $category = request()->query('cat');
+            $get = is_string($get) ? strtolower($get) : null;
+
+            $categories = [
+                'Mobiele telefoons & smartphones' => [
+                    'ALCATEL Mobile Phones', 'Apple', 'BenQ', 'Huawei', 'LG Electronics',
+                    'Lenovo', 'Motorola', 'Palm', 'Pantech', 'Samsung', 'Sony',
+                    'Uniden', 'VTech', 'ZTE', 'AT&T',
+                ],
+                'Computers & elektronica' => [
+                    'Dell', 'Fujitsu', 'Lenovo', 'Toshiba', 'Apple',
+                ],
+                'Monitoren & beeldschermen' => [
+                    'AOC', 'BenQ', 'LG Electronics', 'Samsung', 'Sony',
+                ],
+                'Audio & speakers' => [
+                    'Crown Audio', 'DCM Speakers', 'DigiTech', 'JBL', 'MTX Audio',
+                    'Musica', 'Pioneer', 'Samson', 'Yamaha',
+                ],
+                'Navigatie & meetapparatuur' => [
+                    'Garmin', 'Carl Zeiss', 'Kowa (optiek)', 'Furuno', 'Humminbird',
+                ],
+                'Huishoudelijke & overige elektronica' => [
+                    'Kohler', 'TPI Corporation', 'RCA',
+                ],
+                'Overige / industrie & machines' => [
+                    'Land Pride', 'Grizzly', 'ProForm',
+                ],
+            ];
+
+            $filtered = $brands;
+
+            if ($category && isset($categories[$category])) {
+                $filtered = $filtered->filter(function ($b) use ($categories, $category) {
+                    foreach ($categories[$category] as $catBrand) {
+                        if (stripos($b->name, $catBrand) !== false) {
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+            }
+
+            if ($get) {
+                $filtered = $filtered->filter(fn($b) => strtolower(substr($b->name, 0, 1)) === $get);
+            }
+
+            $initials = $filtered->map(fn($b) => strtoupper(substr($b->name, 0, 1)))->unique()->sort()->values();
+            $letters = collect(range('A', 'Z'));
+
+            $grouped = $filtered->groupBy(fn($b) => strtoupper(substr($b->name, 0, 1)));
+            $columns = 3;
+            $chunks = $grouped->chunk(ceil($grouped->count() / $columns));
+        ?>
+
+
+        <nav class="mb-3">
+            <strong>Categorieën:</strong>
+            @foreach ($categories as $catName => $brandsInCat)
+                <?php
+                    $activeCat = ($category === $catName);
+                    $url = request()->fullUrlWithQuery(['cat' => $catName, 'v' => null]);
+                ?>
+                @if ($activeCat)
+                    <strong>{{ $catName }}</strong>
+                @else
+                    <a href="{{ $url }}">{{ $catName }}</a>
+                @endif
+                @if (!$loop->last)
+                    <span> | </span>
+                @endif
+            @endforeach
+        </nav>
+
 
         <div class="row">
             @if ($get)
@@ -97,6 +174,6 @@
                 @endforeach
             @endif
         </div>
-        
+
     </div>
 </x-layouts.app>
